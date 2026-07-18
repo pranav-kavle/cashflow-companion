@@ -1,0 +1,360 @@
+/* ============================================================
+   Cashflow Companion — design system
+   Ported from the UI prototype (cashflow-companion (5).html).
+   Scope: tokens, reset, typography, and cross-view primitives only.
+   View-specific layouts (dashboard, onboarding, landing, etc.) are
+   built per-screen on top of this, not included here.
+   ============================================================ */
+
+:root {
+  /* surfaces */
+  --paper: #FAFAF8;
+  --paper-2: #F4F4F1;
+  --card: #FFFFFF;
+  --ink: #1A1A1A;
+  --ink-2: #4A4A47;
+  --ink-3: #86867F;
+  --hair: rgba(0, 0, 0, 0.07);
+  --hair-2: rgba(0, 0, 0, 0.12);
+
+  /* brand */
+  --green: #0E5C4A;
+  --green-soft: #E7F0EC;
+  --green-ink: #0A4233;
+  --ink-blue: #1E3A5F;
+
+  /* status */
+  --funded: #1E7A5E;
+  --funded-soft: #E4F2EC;
+  --amber: #B5780B;
+  --amber-soft: #FBF1DC;
+  --red: #B23A3A;
+  --red-soft: #F8E7E5;
+
+  /* shadows */
+  --sh-sm: 0 1px 2px rgba(20, 20, 20, .04), 0 1px 3px rgba(20, 20, 20, .05);
+  --sh-md: 0 2px 4px rgba(20, 20, 20, .04), 0 8px 24px rgba(20, 20, 20, .06);
+  --sh-lg: 0 4px 8px rgba(20, 20, 20, .05), 0 18px 48px rgba(20, 20, 20, .10);
+
+  --radius: 16px;
+  --radius-sm: 11px;
+
+  /* fonts (bound to next/font variables set in layout.tsx) */
+  --font-body: var(--font-sans), system-ui, -apple-system, sans-serif;
+  --font-tabular: var(--font-mono), ui-monospace, monospace;
+  --font-display: var(--font-serif), Georgia, 'Times New Roman', serif;
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+/* ---------- Typography utilities ---------- */
+.mono {
+  font-family: var(--font-tabular);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.serif {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+  font-weight: 400;
+}
+
+/* ---------- Layout primitives ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  box-shadow: var(--sh-md);
+}
+
+.pad {
+  padding: 22px 24px;
+}
+
+.grid {
+  display: grid;
+  gap: 18px;
+}
+
+.cols-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.span-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 980px) {
+  .cols-2,
+  .cols-3,
+  .span-2 {
+    grid-template-columns: 1fr;
+    grid-column: auto;
+  }
+}
+
+/* ---------- Section title ---------- */
+.sec-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--ink-3);
+  font-weight: 600;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ---------- Status pill ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  line-height: 1;
+}
+
+.pill .pdot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.pill.ok {
+  background: var(--funded-soft);
+  color: var(--funded);
+}
+
+.pill.ok .pdot {
+  background: var(--funded);
+}
+
+.pill.warn {
+  background: var(--amber-soft);
+  color: var(--amber);
+}
+
+.pill.warn .pdot {
+  background: var(--amber);
+}
+
+.pill.bad {
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+.pill.bad .pdot {
+  background: var(--red);
+}
+
+.pill.neutral {
+  background: var(--paper-2);
+  color: var(--ink-2);
+}
+
+.pill.neutral .pdot {
+  background: var(--ink-3);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  border: 1px solid var(--hair-2);
+  background: #fff;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 11px 18px;
+  border-radius: 11px;
+  transition: transform .12s, box-shadow .15s, background .15s;
+  box-shadow: var(--sh-sm);
+}
+
+.btn:hover {
+  box-shadow: var(--sh-md);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn.primary {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+
+.btn.primary:hover {
+  background: #0c4f40;
+}
+
+.btn.ghost {
+  background: transparent;
+  box-shadow: none;
+  border-color: var(--hair-2);
+}
+
+.btn.sm {
+  padding: 8px 13px;
+  font-size: 13px;
+}
+
+.btn.lg {
+  padding: 14px 24px;
+  font-size: 15px;
+  border-radius: 13px;
+}
+
+.btn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn:disabled:hover {
+  box-shadow: none;
+}
+
+/* ---------- Disclaimer ---------- */
+.disclaimer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-3);
+  font-size: 12px;
+}
+
+.disclaimer svg {
+  flex: none;
+}
+
+/* ---------- Form primitives ---------- */
+.field {
+  margin-bottom: 18px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.field .hint {
+  font-size: 11.5px;
+  color: var(--ink-3);
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+.input-money {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--hair-2);
+  border-radius: 11px;
+  background: #fff;
+  padding: 0 14px;
+  transition: box-shadow .15s, border-color .15s;
+}
+
+.input-money:focus-within {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px var(--green-soft);
+}
+
+.input-money .pre {
+  color: var(--ink-3);
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.input-money input {
+  border: 0;
+  outline: 0;
+  padding: 11px 0;
+  font-size: 15px;
+  font-family: var(--font-tabular);
+  font-weight: 600;
+  width: 100%;
+  background: transparent;
+  color: var(--ink);
+}
+
+select {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid var(--hair-2);
+  border-radius: 11px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+/* ---------- Accessibility ---------- */
+.btn:focus-visible,
+select:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2.5px solid var(--ink-blue);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -103,6 +103,7 @@ an accountant.
 | [Executive one-pager](docs/onepager.md) | The one-page pitch: problem, hero output, solution, differentiation |
 | [PRD v2](docs/PRD-v2.md) | Full product requirements, canonical demo scenario, acceptance bars, architecture, milestones |
 | [AI agent design](docs/ai-agents.md) | Agent/engine/skills architecture and the AI-vs-deterministic boundary in detail |
+| [Data model](docs/data-model.md) | Entity-relationship diagram: versioned state, transaction classification, and per-plan input lineage |
 | [Personas](docs/personas.md) | Primary and secondary user archetypes, market frame, what's grounded vs. assumed |
 | [Falsifiable hypotheses](docs/hypotheses.md) | Every assumption behind the product, written to be killed, with thresholds and pre-committed decisions |
 
