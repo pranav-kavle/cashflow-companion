@@ -1,18 +1,6 @@
 import { z } from "zod";
 import type { PrismaClient } from "../db";
-
-const classificationLabels = [
-  "income",
-  "transfer",
-  "refund",
-  "repayment",
-  "loan",
-  "other",
-  "fixed_recurring",
-  "variable_discretionary",
-] as const;
-
-const classificationCadences = ["retainer", "project", "windfall"] as const;
+import { ClassificationCadence, ClassificationLabel } from "../../../../src/generated/prisma/enums";
 
 // Provisional — the real value is an open decision pending the Sprint-0 spike.
 // See docs/analysis/pass-2-solution-definition.md §7 and
@@ -21,16 +9,16 @@ export const CONFIDENCE_THRESHOLD = 0.8;
 
 export const classifyTransactionInputShape = {
   transactionId: z.string().uuid(),
-  label: z.enum(classificationLabels),
-  cadence: z.enum(classificationCadences).optional(),
+  label: z.enum(ClassificationLabel),
+  cadence: z.enum(ClassificationCadence).optional(),
   confidence: z.number().min(0).max(1).optional(),
   evidence: z.unknown().optional(),
 };
 
 export interface ClassifyTransactionInput {
   transactionId: string;
-  label: (typeof classificationLabels)[number];
-  cadence?: (typeof classificationCadences)[number];
+  label: ClassificationLabel;
+  cadence?: ClassificationCadence;
   confidence?: number;
   evidence?: unknown;
 }

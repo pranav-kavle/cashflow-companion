@@ -1,7 +1,6 @@
 import { z } from "zod";
 import type { PrismaClient } from "../db";
-
-const bucketKinds = ["taxes", "runway", "pay", "savings", "debt"] as const;
+import { BucketKind } from "../../../../src/generated/prisma/enums";
 
 export const setGoalInputShape = {
   userId: z.string().uuid(),
@@ -9,7 +8,7 @@ export const setGoalInputShape = {
   bucketTargets: z
     .array(
       z.object({
-        bucketKind: z.enum(bucketKinds),
+        bucketKind: z.enum(BucketKind),
         priorityOrder: z.number().int().nonnegative(),
         targetAmount: z.number().nonnegative(),
         isFloor: z.boolean(),
@@ -23,7 +22,7 @@ export interface SetGoalInput {
   userId: string;
   effectiveFrom: string;
   bucketTargets: Array<{
-    bucketKind: (typeof bucketKinds)[number];
+    bucketKind: BucketKind;
     priorityOrder: number;
     targetAmount: number;
     isFloor: boolean;

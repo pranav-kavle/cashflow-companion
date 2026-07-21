@@ -1,30 +1,18 @@
 import { z } from "zod";
 import type { PrismaClient } from "../db";
-
-const classificationLabels = [
-  "income",
-  "transfer",
-  "refund",
-  "repayment",
-  "loan",
-  "other",
-  "fixed_recurring",
-  "variable_discretionary",
-] as const;
-
-const classificationCadences = ["retainer", "project", "windfall"] as const;
+import { ClassificationCadence, ClassificationLabel } from "../../../../src/generated/prisma/enums";
 
 export const recordCorrectionInputShape = {
   classificationId: z.string().uuid(),
-  label: z.enum(classificationLabels),
-  cadence: z.enum(classificationCadences).optional(),
+  label: z.enum(ClassificationLabel),
+  cadence: z.enum(ClassificationCadence).optional(),
   checkInId: z.string().uuid().optional(),
 };
 
 export interface RecordCorrectionInput {
   classificationId: string;
-  label: (typeof classificationLabels)[number];
-  cadence?: (typeof classificationCadences)[number];
+  label: ClassificationLabel;
+  cadence?: ClassificationCadence;
   checkInId?: string;
 }
 
